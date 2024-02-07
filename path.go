@@ -1,15 +1,10 @@
 package main
 
 func FillPath(farm Farm) []Path {
-	var (
-		visitedRoom = map[string]bool{}
-		paths       [][]string
-		// funcPath    func(room string, path []string)
-		// slice       = []string{}
-	)
+	visitedRoom := map[string]bool{}
+	var paths [][]string
 
 	var funcPath func(room string, path []string)
-	// var slice []string
 
 	funcPath = func(room string, path []string) {
 		visitedRoom[room] = true
@@ -18,6 +13,7 @@ func FillPath(farm Farm) []Path {
 		if room == farm.End.Name {
 			anotherPath := make([]string, len(path))
 			copy(anotherPath, path)
+
 			pathIsShared := false
 			pathID := 0
 
@@ -45,10 +41,10 @@ func FillPath(farm Farm) []Path {
 		} else {
 			for _, tunnel := range farm.Tunnels {
 				if tunnel.From == room && !visitedRoom[tunnel.To] {
-					funcPath(tunnel.From, path)
+					funcPath(tunnel.To, path)
 				}
 				if tunnel.To == room && !visitedRoom[tunnel.From] {
-					funcPath(tunnel.To, path)
+					funcPath(tunnel.From, path)
 				}
 			}
 		}

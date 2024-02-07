@@ -30,13 +30,13 @@ func MovingAnts(paths []Path, ants int) {
 				paths[path].Ants = append(paths[path].Ants, ant)
 			}
 
-			index := len(paths[path].Ants) - 1
-			if index != 0 {
-				index = -1 * index
+			i := len(paths[path].Ants) - 1
+			if i != 0 {
+				i = -1 * i
 			}
 			location[ant.UniqueID] = &Location{
 				path,
-				index,
+				i,
 			}
 		}
 
@@ -50,7 +50,7 @@ func MovingAnts(paths []Path, ants int) {
 				if pos.posRoom >= 0 && pos.posRoom < len(paths[pos.posPath].Rooms) {
 					// Récupérer la salle dans laquelle se trouve la fourmi
 					room := paths[pos.posPath].Rooms[pos.posRoom]
-					str = "L" + id + "-" + room.Name
+					str += "L" + id + "-" + room.Name
 					// fmt.Println("Janel Movement:", str)
 					pos.posRoom++
 					// Il y a encore d'autre fourmis
@@ -64,8 +64,8 @@ func MovingAnts(paths []Path, ants int) {
 			} else {
 				str += string(rune(10))
 			}
-			fmt.Println(str)
 		}
+		fmt.Println(str)
 		os.Exit(0)
 	}
 	fmt.Println("ERROR: invalid data format")
