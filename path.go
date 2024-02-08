@@ -1,9 +1,8 @@
 package main
 
 func FillPath(farm Farm) []Path {
-	visitedRoom := map[string]bool{}
+	visitedRoom := make(map[string]bool)
 	var paths [][]string
-
 	var funcPath func(room string, path []string)
 
 	funcPath = func(room string, path []string) {
@@ -51,7 +50,6 @@ func FillPath(farm Farm) []Path {
 		visitedRoom[room] = false
 	}
 	funcPath(farm.Start.Name, []string{})
-	Sorting(paths)
 
 	return ChangeFarmToPath(farm, paths)
 }

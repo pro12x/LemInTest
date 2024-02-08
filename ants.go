@@ -14,6 +14,7 @@ func MovingAnts(paths []Path, ants int) {
 	if len(paths) != 0 {
 		path := 0
 		location := make(map[string]*Location)
+
 		for i := 0; i < ants; i++ {
 			next := (path + 1) % len(paths)
 			ant := Ant{
@@ -50,7 +51,7 @@ func MovingAnts(paths []Path, ants int) {
 				if pos.posRoom >= 0 && pos.posRoom < len(paths[pos.posPath].Rooms) {
 					// Récupérer la salle dans laquelle se trouve la fourmi
 					room := paths[pos.posPath].Rooms[pos.posRoom]
-					str += "L" + id + "-" + room.Name
+					str += fmt.Sprintf("L%v-%v ", id, room.Name)
 					// fmt.Println("Janel Movement:", str)
 					pos.posRoom++
 					// Il y a encore d'autre fourmis

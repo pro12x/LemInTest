@@ -41,9 +41,9 @@ type Farm struct {
 //=====================================================================
 
 func main() {
-	str := []string{"file03"}
+	// str := []string{"file03"}
 
-	// str := os.Args[1:]
+	str := os.Args[1:]
 
 	//if len(os.Args[1:]) == 1 && ValidFile(os.Args[1:][0]) {
 	if len(str) == 1 && ValidFile(str[0]) {
@@ -63,7 +63,8 @@ func main() {
 		fmt.Println("All Tunnels:", farm.Tunnels)
 
 		paths := FillPath(farm)
-		fmt.Println("All Tunnels:", paths)
+		fmt.Println("All Paths:", paths)
+		fmt.Println()
 		MovingAnts(paths, farm.Ants)
 
 		os.Exit(0)

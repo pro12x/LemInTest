@@ -67,14 +67,15 @@ func ChangeFarmToPath(farm Farm, tab [][]string) []Path {
 		for _, path := range tab {
 			// fmt.Println("Janel Path:", path)
 			var rooms []Room
-			for _, p := range path {
-				if p == farm.Start.Name {
-					rooms = append(rooms, farm.Rooms[p])
+			for _, room := range path {
+				if room != farm.Start.Name {
+					rooms = append(rooms, farm.Rooms[room])
 					// fmt.Println("Janel Room:", path)
 				}
 			}
 			paths = append(paths, Path{Rooms: rooms})
 		}
+		// fmt.Println("Janel Path:", paths)
 		return paths
 	}
 	return nil

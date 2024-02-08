@@ -24,10 +24,10 @@ func FillFarm(tab []string) (Farm, error) {
 		)
 
 		ants, err = strconv.Atoi(tab[0])
-		tab = tab[1:]
 		if err != nil {
 			return Farm{}, fmt.Errorf("ERROR: invalid data format\n")
 		}
+		tab = tab[1:]
 		// fmt.Println("Janel ants:", ants)
 		// farm.Ants = ants
 
