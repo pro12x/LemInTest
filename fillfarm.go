@@ -12,7 +12,9 @@ func FillFarm(tab []string) (Farm, error) {
 			err     error
 			farm    Farm
 			rooms   = make(map[string]Room)
+			Rooms   []Room
 			slice   []string
+			li      []string
 			isStart bool
 			isEnd   bool
 			room    Room
@@ -52,6 +54,7 @@ func FillFarm(tab []string) (Farm, error) {
 			}
 
 			if strings.Contains(str, "-") {
+				li = append(li, str)
 				slice = strings.Fields(Replace(str, "-", " "))
 			} else {
 				slice = strings.Fields(str)
@@ -70,15 +73,16 @@ func FillFarm(tab []string) (Farm, error) {
 					start = room
 					isStart = false
 					// fmt.Println("Janel start:", start)
-					continue
+
 				}
 
 				if isEnd {
 					end = room
-					isStart = false
+					isEnd = false
 					// fmt.Println("Janel end:", end)
-					continue
+
 				}
+				Rooms = append(Rooms, room)
 				continue
 			} else if len(slice) == 2 {
 				tunnel, err = FillTunnel(slice)
@@ -104,7 +108,9 @@ func FillFarm(tab []string) (Farm, error) {
 			Ants:    ants,
 			Start:   start,
 			End:     end,
+			Li:      li,
 			Rooms:   rooms,
+			Roo:     Rooms,
 			Tunnels: tunnels,
 		}
 		return farm, nil

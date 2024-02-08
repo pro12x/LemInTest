@@ -23,7 +23,7 @@ func MovingAnts(paths []Path, ants int) {
 			pathValue := len(paths[path].Ants) + len(paths[path].Rooms)
 			nextValue := len(paths[next].Ants) + len(paths[next].Rooms)
 
-			if nextValue == pathValue {
+			if nextValue <= pathValue {
 				paths[next].Ants = append(paths[next].Ants, ant)
 				path = next
 			} else {
@@ -50,7 +50,7 @@ func MovingAnts(paths []Path, ants int) {
 				if pos.posRoom >= 0 && pos.posRoom < len(paths[pos.posPath].Rooms) {
 					// Récupérer la salle dans laquelle se trouve la fourmi
 					room := paths[pos.posPath].Rooms[pos.posRoom]
-					str += "L" + id + "-" + room.Name
+					str += "L" + id + "-" + room.Name + " "
 					// fmt.Println("Janel Movement:", str)
 					pos.posRoom++
 					// Il y a encore d'autre fourmis

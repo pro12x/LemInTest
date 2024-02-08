@@ -31,9 +31,11 @@ type Tunnel struct {
 
 // Farm struct represents the overall structure of the ant farm
 type Farm struct {
-	Ants    int             // OK - Number of Ants
-	Start   Room            // starting room
-	End     Room            // ending room
+	Ants    int  // OK - Number of Ants
+	Start   Room // starting room
+	End     Room
+	Li      []string // ending room
+	Roo     []Room
 	Rooms   map[string]Room // All rooms
 	Tunnels []Tunnel        // All tunnels
 }
@@ -41,11 +43,9 @@ type Farm struct {
 //=====================================================================
 
 func main() {
-	str := []string{"file03"}
 
-	// str := os.Args[1:]
+	str := os.Args[1:]
 
-	//if len(os.Args[1:]) == 1 && ValidFile(os.Args[1:][0]) {
 	if len(str) == 1 && ValidFile(str[0]) {
 		//data, err := Read(os.Args[1:][0])
 		data, err := Read(str[0])
@@ -56,14 +56,12 @@ func main() {
 		if err != nil {
 			DisplayError(err)
 		}
-		fmt.Println("Ants:", farm.Ants)
-		fmt.Println("Start Room:", farm.Start)
-		fmt.Println("End Room:", farm.End)
-		fmt.Println("All Rooms:", farm.Rooms)
-		fmt.Println("All Tunnels:", farm.Tunnels)
-
 		paths := FillPath(farm)
-		fmt.Println("All Tunnels:", paths)
+		for _, i2 := range paths {
+			fmt.Println(i2)
+			fmt.Println("==================")
+		}
+
 		MovingAnts(paths, farm.Ants)
 
 		os.Exit(0)
