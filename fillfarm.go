@@ -75,7 +75,6 @@ func FillFarm(tab []string) (Farm, error) {
 					// fmt.Println("Janel start:", start)
 
 				}
-
 				if isEnd {
 					end = room
 					isEnd = false

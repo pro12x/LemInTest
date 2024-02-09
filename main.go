@@ -57,13 +57,7 @@ func main() {
 			DisplayError(err)
 		}
 		paths := FillPath(farm)
-		for _, i2 := range paths {
-			fmt.Println(i2)
-			fmt.Println("==================")
-		}
-
 		MovingAnts(paths, farm.Ants)
-
 		os.Exit(0)
 	}
 	fmt.Println("USAGE: /lemin <filename>")

@@ -19,7 +19,6 @@ func MovingAnts(paths []Path, ants int) {
 			ant := Ant{
 				UniqueID: fmt.Sprintf("%v", i+1),
 			}
-
 			pathValue := len(paths[path].Ants) + len(paths[path].Rooms)
 			nextValue := len(paths[next].Ants) + len(paths[next].Rooms)
 
@@ -29,7 +28,6 @@ func MovingAnts(paths []Path, ants int) {
 			} else {
 				paths[path].Ants = append(paths[path].Ants, ant)
 			}
-
 			i := len(paths[path].Ants) - 1
 			if i != 0 {
 				i = -1 * i
@@ -39,12 +37,10 @@ func MovingAnts(paths []Path, ants int) {
 				i,
 			}
 		}
-
 		var str string
 		for {
 			// Nous supposons que toutes les fourmis sont déjà passées
 			check := true
-
 			// Parcours selon les positions des fourmis
 			for id, pos := range location {
 				if pos.posRoom >= 0 && pos.posRoom < len(paths[pos.posPath].Rooms) {

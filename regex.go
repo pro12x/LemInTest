@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strings"
 )
 
 func DisplayError(err error) {
@@ -23,7 +22,7 @@ func ValidFile(file string) bool {
 	return false
 }
 
-func OnlyAlphaNumeric(s string) bool {
+/*func OnlyAlphaNumeric(s string) bool {
 	if len(strings.TrimSpace(s)) != 0 {
 		cpt := 0
 		for _, c := range strings.TrimSpace(s) {
@@ -36,7 +35,7 @@ func OnlyAlphaNumeric(s string) bool {
 		}
 	}
 	return false
-}
+}*/
 
 func Sorting(paths [][]string) {
 	index := 0
