@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
+
+var Valid []Room
+var Links []string
 
 func FillFarm(tab []string) (Farm, error) {
 	if len(tab) != 0 {
@@ -32,7 +36,8 @@ func FillFarm(tab []string) (Farm, error) {
 		}
 		// fmt.Println("Janel ants:", ants)
 		// farm.Ants = ants
-
+		cptstart := 0
+		cptend := 0
 		for _, str := range tab {
 			str = strings.TrimSpace(str)
 			if len(str) == 0 {
@@ -40,11 +45,13 @@ func FillFarm(tab []string) (Farm, error) {
 			}
 
 			if str == "##start" {
+				cptstart++
 				isStart = true
 				continue
 			}
 
 			if str == "##end" {
+				cptend++
 				isEnd = true
 				continue
 			}
@@ -54,6 +61,7 @@ func FillFarm(tab []string) (Farm, error) {
 			}
 
 			if strings.Contains(str, "-") {
+				ValidLink(str)
 				li = append(li, str)
 				slice = strings.Fields(Replace(str, "-", " "))
 			} else {
@@ -82,6 +90,7 @@ func FillFarm(tab []string) (Farm, error) {
 
 				}
 				Rooms = append(Rooms, room)
+				ValidRoom(room)
 				continue
 			} else if len(slice) == 2 {
 				tunnel, err = FillTunnel(slice)
@@ -103,6 +112,9 @@ func FillFarm(tab []string) (Farm, error) {
 				}
 			}
 		}
+		if cptend != 1 || cptstart != 1 {
+			return Farm{}, fmt.Errorf("ERROR: invalid data format\n")
+		}
 		farm = Farm{
 			Ants:    ants,
 			Start:   start,
@@ -115,4 +127,34 @@ func FillFarm(tab []string) (Farm, error) {
 		return farm, nil
 	}
 	return Farm{}, fmt.Errorf("ERROR: invalid data format\n")
+}
+
+func ValidRoom(room Room) {
+	if len(Valid) == 0 {
+		Valid = append(Valid, room)
+		return
+	}
+	for i := 0; i < len(Valid); i++ {
+		if Valid[i].X == room.X && Valid[i].Y == room.Y || Valid[i].Name == room.Name {
+			fmt.Println("ERROR: invalid room coordonate")
+			os.Exit(0)
+		}
+	}
+	Valid = append(Valid, room)
+}
+
+func ValidLink(str string) {
+	if len(Links) == 0 {
+		Links = append(Links, str)
+		return
+	}
+	part := strings.Split(str, "-")
+	for i := 0; i < len(Links); i++ {
+		li := strings.Split(Links[i], "-")
+		if (li[0] == part[1] && li[1] == part[0]) || strings.EqualFold(str, Links[i]) {
+			fmt.Println("ERROR: invalid room coordonate")
+			os.Exit(0)
+		}
+	}
+	Links = append(Links, str)
 }

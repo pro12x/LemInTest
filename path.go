@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strings"
 )
 
@@ -12,6 +14,10 @@ func FillPath(farm Farm) []Path {
 	PathValide = Doublons(PathValide, farm.Start, farm.End)
 	pathss := Transform(PathValide)
 	Sorting(pathss)
+	if len(pathss) == 0 {
+		fmt.Println("ERROR: invalid data format")
+		os.Exit(0)
+	}
 	return ChangeFarmToPath(farm, pathss)
 }
 

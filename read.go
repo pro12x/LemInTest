@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"strings"
@@ -17,4 +18,17 @@ func Read(filename string) ([]string, error) {
 	}
 	result = strings.Split(string(file), "\n")
 	return result, nil
+}
+
+func ReadDisplay(filename string) {
+	file, err := os.Open("./file/" + filename)
+	if err != nil {
+		fmt.Errorf("ERROR: cannot open <%v> file: no such or directory", filename)
+		return
+	}
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+	fmt.Println()
 }

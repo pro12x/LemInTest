@@ -57,6 +57,7 @@ func main() {
 			DisplayError(err)
 		}
 		paths := FillPath(farm)
+		ReadDisplay(str[0])
 		MovingAnts(paths, farm.Ants)
 		os.Exit(0)
 	}
